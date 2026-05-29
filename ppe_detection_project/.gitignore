@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+
+# Local datasets and model artifacts
+*.pt
+*.onnx
+*.engine
+*.mp4
+*.avi
+*.mov
+*.mkv
+
+# Keep the runs directory placeholder, but ignore generated outputs.
+runs/**
+!runs/.gitkeep
+
+# Prepared local datasets
+datasets/
