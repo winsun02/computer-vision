@@ -29,7 +29,7 @@
 ## Chương 5: Huấn luyện mô hình
 - Cấu hình môi trường phần cứng/phần mềm.
 - Tham số huấn luyện: model, epochs, imgsz, batch, optimizer.
-- Cách chạy script `src/train.py`.
+- Cách chạy script `src/train.py` trên máy local và trên Google Colab bằng `notebooks/ppe_detection_colab.ipynb`.
 - Theo dõi loss và chọn `best.pt`.
 
 ## Chương 6: Kết quả thực nghiệm
@@ -41,7 +41,7 @@
 ## Chương 7: Demo hệ thống
 - Kiến trúc demo ảnh/video/webcam.
 - Luồng xử lý: đọc input → YOLO inference → kiểm tra vi phạm → vẽ kết quả.
-- Demo Streamlit upload ảnh.
+- Demo Streamlit upload ảnh và notebook Google Colab cho train/evaluate/inference.
 - Ví dụ cảnh báo NO HELMET, NO VEST.
 
 ## Chương 8: Kết luận và hướng phát triển

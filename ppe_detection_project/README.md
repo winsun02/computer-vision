@@ -50,6 +50,8 @@ ppe_detection_project/
 │   └── utils.py
 ├── app/
 │   └── streamlit_app.py
+├── notebooks/
+│   └── ppe_detection_colab.ipynb
 ├── runs/
 ├── requirements.txt
 ├── README.md
@@ -267,7 +269,34 @@ Script sẽ in:
 
 Nếu Ultralytics sinh được confusion matrix, file sẽ nằm trong thư mục `runs/evaluate/ppe_eval`.
 
-## 13. Ý nghĩa các metric
+
+## 13. Chạy trên Google Colab
+
+Project có notebook Colab sẵn tại:
+
+```text
+notebooks/ppe_detection_colab.ipynb
+```
+
+Các bước chạy khuyến nghị:
+
+1. Mở Google Colab và upload/open file `notebooks/ppe_detection_colab.ipynb`.
+2. Chọn `Runtime -> Change runtime type -> GPU` để train nhanh hơn.
+3. Nếu project đã đưa lên GitHub, điền biến `REPO_URL` trong cell đầu tiên. Nếu không, notebook sẽ yêu cầu upload file `.zip` chứa thư mục `ppe_detection_project`, hoặc bạn có thể copy sẵn thư mục này vào `/content/ppe_detection_project`.
+4. Chạy cell cài đặt dependencies bằng `pip install -r requirements.txt`.
+5. Upload file `kaggle.json` khi notebook yêu cầu, hoặc cấu hình Kaggle credential trước trong Colab.
+6. Chạy cell chuẩn bị dataset:
+
+```bash
+python src/prepare_css_dataset.py --download --output /content/datasets/construction_site_safety --yaml-output data/data.yaml --copy --force
+```
+
+7. Chạy cell train/evaluate/detect ảnh. Notebook sẽ dùng GPU nếu `torch.cuda.is_available()` trả về `True`.
+8. Cuối notebook có cell zip thư mục `runs` để tải kết quả về máy.
+
+Nếu không muốn dùng notebook, bạn vẫn có thể chạy trực tiếp các command trong Colab terminal/cell theo đúng thứ tự: cài requirements → chuẩn bị dataset → train → evaluate → inference.
+
+## 14. Ý nghĩa các metric
 
 - **Precision**: trong các object model dự đoán là đúng, tỷ lệ bao nhiêu thực sự đúng. Precision cao nghĩa là ít false positive.
 - **Recall**: trong các object thật sự tồn tại, model tìm ra được bao nhiêu. Recall cao nghĩa là ít false negative.
@@ -277,7 +306,7 @@ Nếu Ultralytics sinh được confusion matrix, file sẽ nằm trong thư m�
 - **mAP50**: mean Average Precision tại ngưỡng IoU = 0.50.
 - **mAP50-95**: mAP trung bình trên nhiều ngưỡng IoU từ 0.50 đến 0.95. Đây là metric nghiêm ngặt hơn mAP50.
 
-## 14. Logic cảnh báo vi phạm PPE
+## 15. Logic cảnh báo vi phạm PPE
 
 File `src/violation_check.py` tách riêng rule kiểm tra vi phạm:
 
@@ -291,7 +320,7 @@ File `src/violation_check.py` tách riêng rule kiểm tra vi phạm:
 
 Muốn thay đổi PPE bắt buộc, sửa `DEFAULT_REQUIRED_PPE` trong `src/violation_check.py` hoặc truyền danh sách khác khi gọi function `check_ppe_violations`.
 
-## 15. Lỗi tiềm ẩn và cách sửa
+## 16. Lỗi tiềm ẩn và cách sửa
 
 ### Kaggle CLI không tải được dataset
 
@@ -351,7 +380,7 @@ Cách cải thiện:
 - Dùng pose estimation để xác định vùng cơ thể chính xác hơn.
 - Nếu đổi sang dataset khác, chỉ thêm class/rule sau khi class đó thật sự tồn tại trong dataset mới.
 
-## 16. Hướng phát triển thêm
+## 17. Hướng phát triển thêm
 
 - Thêm tracking ByteTrack/DeepSORT để theo dõi từng công nhân.
 - Thêm rule theo khu vực nguy hiểm trong frame.
