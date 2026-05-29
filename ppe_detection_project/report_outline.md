@@ -22,7 +22,7 @@
 - Class gốc và class chuẩn hóa: Hardhat → helmet, NO-Hardhat → no_helmet, Safety Vest → safety_vest, NO-Safety Vest → no_vest, ...
 - Cấu trúc dataset YOLO sau chuẩn hóa: `images/train`, `images/val`, `images/test`, `labels/train`, `labels/val`, `labels/test`.
 - Quy trình dùng `src/prepare_css_dataset.py` để download/copy/symlink ảnh và remap label.
-- Hạn chế dataset: chưa có gloves, goggles, boots; đề xuất bổ sung dataset nếu cần kiểm tra các class này.
+- Phạm vi xử lý class: chỉ dùng các class có trong dataset đã chọn, không thêm class ngoài dataset.
 - Kiểm tra chất lượng nhãn và chia train/val/test.
 - Augmentation nếu có.
 

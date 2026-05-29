@@ -22,19 +22,16 @@ class Detection:
 
 # Common aliases make the violation logic resilient to different datasets.
 CLASS_ALIASES: dict[str, set[str]] = {
-    "person": {"person", "worker", "human"},
-    "helmet": {"helmet", "hardhat", "hard_hat", "hard-hat", "safety_helmet"},
-    "safety_vest": {"safety_vest", "vest", "safety-vest", "reflective_vest"},
-    "mask": {"mask", "face_mask", "respirator"},
-    "gloves": {"gloves", "glove", "safety_gloves"},
-    "goggles": {"goggles", "glasses", "safety_glasses", "eye_protection"},
-    "boots": {"boots", "boot", "safety_boots", "shoes", "safety_shoes"},
-    "no_helmet": {"no_helmet", "no-helmet", "without_helmet", "no hardhat", "no_hardhat"},
-    "no_vest": {"no_vest", "no-vest", "without_vest", "no_safety_vest", "no-safety-vest"},
-    "no_mask": {"no_mask", "no-mask", "without_mask", "no_face_mask"},
-    "safety_cone": {"safety_cone", "safety-cone", "cone"},
-    "machinery": {"machinery", "machine", "equipment"},
-    "vehicle": {"vehicle", "truck", "car"},
+    "helmet": {"helmet", "hardhat", "hard_hat", "hard-hat"},
+    "mask": {"mask"},
+    "no_helmet": {"no_helmet", "no-helmet", "no_hardhat", "no-hardhat"},
+    "no_mask": {"no_mask", "no-mask"},
+    "no_vest": {"no_vest", "no-vest", "no_safety_vest", "no-safety-vest"},
+    "person": {"person"},
+    "safety_cone": {"safety_cone", "safety-cone"},
+    "safety_vest": {"safety_vest", "safety-vest", "vest"},
+    "machinery": {"machinery"},
+    "vehicle": {"vehicle"},
 }
 
 
@@ -125,10 +122,6 @@ def region_box(person_box: tuple[int, int, int, int], region: str) -> tuple[int,
         return x1, y1, x2, y1 + int(0.35 * height)
     if region == "torso":
         return x1, y1 + int(0.25 * height), x2, y1 + int(0.75 * height)
-    if region == "hands":
-        return x1, y1 + int(0.25 * height), x2, y1 + int(0.85 * height)
-    if region == "feet":
-        return x1, y1 + int(0.65 * height), x2, y2
     return person_box
 
 

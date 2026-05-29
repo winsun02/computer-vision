@@ -14,7 +14,7 @@ Project này chọn dataset thật, công khai trên Kaggle:
   - Có thêm class môi trường như `Safety Cone`, `machinery`, `vehicle`, giúp model học tốt hơn trong scene thực tế.
   - Dataset đã có export kiểu YOLO/Roboflow nên dễ chuẩn hóa về cấu trúc `images/train`, `labels/train`, ...
 
-> Lưu ý: dataset này không bao phủ đầy đủ `gloves`, `goggles`, `boots`. Code vẫn hỗ trợ các class đó nếu bạn bổ sung dataset/label tương ứng, nhưng file cấu hình dataset đã chọn sẽ tập trung vào các class thật có trong dataset.
+> Lưu ý: theo yêu cầu hiện tại, project chỉ xử lý các class có thật trong dataset đã chọn; không thêm rule/class ngoài dataset.
 
 ## 2. Mục tiêu
 
@@ -28,7 +28,7 @@ Project này chọn dataset thật, công khai trên Kaggle:
   - `no_mask`
   - `no_vest` (chuẩn hóa từ `NO-Safety Vest`)
   - `safety_cone`, `machinery`, `vehicle`
-- Code vẫn có alias và rule mở rộng cho `gloves`, `goggles`, `boots` nếu dataset mới có các class này.
+- Chỉ xử lý các class có trong dataset đã chọn; không thêm class/rule ngoài dataset.
 - Hiển thị cảnh báo trực tiếp nếu người trong ảnh/video thiếu thiết bị bắt buộc, mặc định là helmet và safety vest.
 - Hỗ trợ Windows/Linux, ảnh đơn, video file, webcam và giao diện Streamlit.
 
@@ -284,7 +284,7 @@ File `src/violation_check.py` tách riêng rule kiểm tra vi phạm:
 - Nếu có class `person`, mỗi người được kiểm tra độc lập.
 - `helmet` được tìm trong vùng đầu.
 - `safety_vest` được tìm trong vùng thân.
-- `mask`, `goggles`, `gloves`, `boots` đã có mapping vùng cơ thể để mở rộng.
+- `mask` được tìm trong vùng đầu nếu bạn thêm `mask` vào danh sách PPE bắt buộc.
 - Nếu dataset không có class `person`, hệ thống vẫn xử lý được bằng cách:
   - báo cảnh báo khi phát hiện class âm như `no_helmet`, `no_vest`, `no_mask`;
   - cảnh báo global nếu có PPE object nhưng thiếu class bắt buộc.
@@ -347,9 +347,9 @@ Nguyên nhân: rule hiện tại dùng heuristic theo vùng bounding box. Với 
 Cách cải thiện:
 
 - Dùng tracking để giữ ID người qua nhiều frame.
-- Tinh chỉnh vùng `head`, `torso`, `hands`, `feet` trong `src/utils.py`.
+- Tinh chỉnh vùng `head`, `torso` trong `src/utils.py`.
 - Dùng pose estimation để xác định vùng cơ thể chính xác hơn.
-- Bổ sung dataset có class `gloves`, `goggles`, `boots` nếu muốn kiểm tra đủ toàn bộ PPE.
+- Nếu đổi sang dataset khác, chỉ thêm class/rule sau khi class đó thật sự tồn tại trong dataset mới.
 
 ## 16. Hướng phát triển thêm
 

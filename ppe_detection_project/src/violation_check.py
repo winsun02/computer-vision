@@ -27,10 +27,6 @@ PPE_REGION = {
     "helmet": "head",
     "safety_vest": "torso",
     "mask": "head",
-    "no_mask": "head",
-    "goggles": "head",
-    "gloves": "hands",
-    "boots": "feet",
 }
 EXPLICIT_NEGATIVE = {
     "helmet": "no_helmet",
@@ -41,9 +37,6 @@ WARNING_TEXT = {
     "helmet": "NO HELMET",
     "safety_vest": "NO VEST",
     "mask": "NO MASK",
-    "gloves": "NO GLOVES",
-    "goggles": "NO GOGGLES",
-    "boots": "NO BOOTS",
 }
 
 
