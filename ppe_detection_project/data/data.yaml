@@ -1,0 +1,24 @@
+# File cấu hình dataset YOLO cho bài toán phát hiện PPE.
+# Lưu ý: đây chỉ là mẫu cấu hình, không phải dataset tự bịa.
+# Hãy thay đổi `path` cho đúng vị trí dataset trên Google Colab hoặc Google Drive.
+# Cấu trúc dataset cần có:
+# dataset/
+#   images/train, images/val, images/test
+#   labels/train, labels/val, labels/test
+
+path: /content/ppe_dataset
+train: images/train
+val: images/val
+test: images/test
+
+# Có thể thêm/bớt class theo dataset thật. Thứ tự phải khớp với id class trong label YOLO.
+names:
+  0: person
+  1: helmet
+  2: safety_vest
+  3: mask
+  4: gloves
+  5: goggles
+  6: boots
+  7: no_helmet
+  8: no_vest
