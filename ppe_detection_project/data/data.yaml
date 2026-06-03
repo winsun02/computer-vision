@@ -1,0 +1,24 @@
+# YOLO configuration for the Kaggle/Roboflow Construction Site Safety Image Dataset.
+# Dataset page: https://www.kaggle.com/datasets/snehilsanyal/construction-site-safety-image-dataset-roboflow
+# Prepare it with:
+#   python src/prepare_css_dataset.py --source <downloaded_zip_or_extracted_folder> --output datasets/construction_site_safety
+
+path: ../datasets/construction_site_safety
+train: images/train
+val: images/val
+test: images/test
+
+# Class IDs after remapping by src/prepare_css_dataset.py.
+# The dataset's original names are normalized to snake_case so all inference
+# and violation code can use the same class naming convention.
+names:
+  0: helmet
+  1: mask
+  2: no_helmet
+  3: no_mask
+  4: no_vest
+  5: person
+  6: safety_cone
+  7: safety_vest
+  8: machinery
+  9: vehicle
